@@ -8,9 +8,9 @@
         <properties>
             <!-- The default behavior is not generating a schema. Schema generation is good for demos, 
                 RAD, development, etc but likely not a good idea for production. -->
-            <property name="javax.persistence.schema-generation.database.action"
+            <property name="jakarta.persistence.schema-generation.database.action"
                 value="create" />
-            <property name="javax.persistence.sql-load-script-source"
+            <property name="jakarta.persistence.sql-load-script-source"
                 value="META-INF/initital-data.sql" />
             <!-- The default log level of info is best for production, want to see verbose output for 
                 development. -->
