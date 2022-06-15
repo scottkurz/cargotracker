@@ -32,7 +32,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 
-		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+		<jakartaee-api.version>9.0.0</jakartaee-api.version>
 	</properties>
 
 	<dependencyManagement>
@@ -312,7 +312,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>8.0.0</version>
+            <version>9.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -337,7 +337,8 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>8.0</version>
+			<version>11.0.0</version>
+			<classifier>jakarta</classifier>
 		</dependency>
       </dependencies>
     
