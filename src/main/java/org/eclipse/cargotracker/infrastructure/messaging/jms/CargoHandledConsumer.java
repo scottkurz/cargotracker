@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.MessageDriven;
 import jakarta.inject.Inject;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.TextMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
+import jakarta.jms.TextMessage;
 import org.eclipse.cargotracker.application.CargoInspectionService;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 
@@ -22,7 +22,7 @@ import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
     activationConfig = {
       @ActivationConfigProperty(
           propertyName = "destinationType",
-          propertyValue = "javax.jms.Queue"),
+          propertyValue = "jakarta.jms.Queue"),
       @ActivationConfigProperty(
           propertyName = "destination",
           propertyValue = "java:app/jms/CargoHandledQueue")

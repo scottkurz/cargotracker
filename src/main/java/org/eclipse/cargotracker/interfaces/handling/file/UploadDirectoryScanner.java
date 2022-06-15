@@ -1,8 +1,8 @@
 package org.eclipse.cargotracker.interfaces.handling.file;
 
 import jakarta.annotation.security.RunAs;
-import javax.batch.operations.JobOperator;
-import javax.batch.runtime.BatchRuntime;
+import jakarta.batch.operations.JobOperator;
+import jakarta.batch.runtime.BatchRuntime;
 import jakarta.ejb.Schedule;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;

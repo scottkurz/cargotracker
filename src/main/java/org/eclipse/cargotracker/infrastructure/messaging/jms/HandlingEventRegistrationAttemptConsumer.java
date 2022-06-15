@@ -3,10 +3,10 @@ package org.eclipse.cargotracker.infrastructure.messaging.jms;
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.MessageDriven;
 import jakarta.inject.Inject;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
+import jakarta.jms.ObjectMessage;
 import org.eclipse.cargotracker.application.HandlingEventService;
 import org.eclipse.cargotracker.domain.model.handling.CannotCreateHandlingEventException;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
@@ -16,7 +16,7 @@ import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAtt
     activationConfig = {
       @ActivationConfigProperty(
           propertyName = "destinationType",
-          propertyValue = "javax.jms.Queue"),
+          propertyValue = "jakarta.jms.Queue"),
       @ActivationConfigProperty(
           propertyName = "destination",
           propertyValue = "java:app/jms/HandlingEventRegistrationAttemptQueue")

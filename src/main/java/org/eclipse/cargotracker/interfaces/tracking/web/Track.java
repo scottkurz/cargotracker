@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import javax.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbBuilder;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
