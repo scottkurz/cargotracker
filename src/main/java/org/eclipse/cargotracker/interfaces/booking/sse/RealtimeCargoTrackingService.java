@@ -46,8 +46,10 @@ public class RealtimeCargoTrackingService {
 
   @PreDestroy
   public void close() {
-    broadcaster.close();
-    logger.log(Level.FINEST, "SSE broadcaster closed.");
+	if (broadcaster != null) {
+	  broadcaster.close();
+	  logger.log(Level.FINEST, "SSE broadcaster closed.");
+	}
   }
 
   public void onCargoUpdated(@ObservesAsync @CargoUpdated Cargo cargo) {
