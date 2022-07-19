@@ -41,9 +41,7 @@ public class RealtimeCargoTrackingService {
         String name = "java:app/jms/CargoHandledQueue";
         InitialContext ctx = new InitialContext();
         Object obj = InitialContext.doLookup(name);
-        System.out.println(name + " bound to: " + obj);
       } catch (NamingException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
       if (broadcaster == null) {
