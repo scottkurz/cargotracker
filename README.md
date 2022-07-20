@@ -43,7 +43,7 @@ To run using Maven with Open Liberty, follow these steps:
 
 _NOTE: OL currently cannot search for JDBC drivers using variable substitution. The user will be required to manually change the HSQL DB .jar file path in the server.xml to their unique file path in order for the application to start._
  
-You can safely ignore the shrinkwrap features warning and the AggregateObjectMapping nested foreign key warning, as these don’t affect the application functionality. 
+You can safely ignore the shrinkwrap features warning, the AggregateObjectMapping nested foreign key warning, and the JMS listener warnings as these don’t affect the application functionality. 
 
 * The application should start without any additional errors and you can view it at http://localhost:8080/cargo-tracker. 
 
