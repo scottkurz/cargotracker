@@ -38,7 +38,7 @@ To run using Maven with Open Liberty, follow these steps:
 * Ensure you are running Java SE 8 or Java SE 11 (IBM Semeru recommended with Open Liberty: https://developer.ibm.com/languages/java/semeru-runtimes/downloads/ -> "Java 11" from the version dropdown menu.
 * Make sure JAVA_HOME is set.
 * Navigate to the cargotracker directory and access the server.xml located in src/main/liberty/config.
-* Change the filler file path for the HSQL DB library (Line 96) to your unique file path. 
+* Change the filler file path for the HSQL DB library (Line 110) to your unique file path. 
 * Return to the cargotracker directory and develop the application with Liberty Maven Plugin: "mvn -P openliberty liberty:dev -DserverStartTimeout=300".
 
 _NOTE: OL currently cannot search for JDBC drivers using variable substitution. The user will be required to manually change the HSQL DB .jar file path in the server.xml to their unique file path in order for the application to start._
