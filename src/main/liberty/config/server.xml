@@ -101,18 +101,24 @@
     destinationType="javax.jms.Queue"/>
   </jmsActivationSpec>
   
-  <jdbcDriver id="hsqldriver" libraryRef="hsqlLib"/>
+  <jdbcDriver id="postgresDriver" libraryRef="postgresqlLib"/>
   
   <!-- Currently, OL cannot find JDBC drivers when using variable substitution.
   	   To work around this issue, replace the filler directory below with your unique file path. -->
   
-  <library id="hsqlLib">
-  	<fileset dir="/Users/chanun/hsqldb" includes="hsqldb*.jar"/>
+  <library id="postgresqlLib">
+  	<fileset dir="/Users/chanun/postgres" includes="postgresql*.jar"/>
   </library>
   
-  <dataSource id="cargoTrackerDataStore" jndiName="jdbc/CargoTrackerDatabase">
-    <jdbcDriver libraryRef="hsqlLib" />
-    <properties password="pwd" user="usr" URL="jdbc:hsqldb:mem:CargoTrackerDB" />
+  <dataSource id="cargoTrackerDataStore" 
+  	jndiName="jdbc/cargotrackerdatabase">
+  	<jdbcDriver libraryRef="postgresqlLib"/>
+    <properties.postgresql serverName="localhost" 
+    portNumber="5432" 
+    databaseName= "postgres" 
+    URL="jdbc:postgresql:mem:cargotrackerdatabase"
+    user="${env.POSTGRES_USER}"
+    password="${env.POSTGRES_PASSWORD}"/>
   </dataSource>
   
   <databaseStore id="EJBPersistentTimerStore" tablePrefix="WLP2_" keyGenerationStrategy="SEQUENCE"/>
@@ -125,8 +131,7 @@
   </persistentExecutor>
 
   <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
-  <dataSource id="DefaultDataSource" jdbcDriverRef="hsqldriver">
-        <properties password="pwd" user="usr" URL="jdbc:hsqldb:mem:EJBTimerDS" />
+  <dataSource id="DefaultDataSource" jdbcDriverRef="postgresDriver">
   </dataSource>
   
   <ejbContainer>
@@ -135,7 +140,7 @@
   </ejbContainer>
 
   <webApplication location="cargo-tracker.war" contextRoot="cargo-tracker">
-  	<classloader commonLibraryRef="hsqlLib"/>
+  	<classloader commonLibraryRef="postgresqlLib"/>
   	<web-bnd moduleName="cargo-tracker">
       <env-entry name="java:app/configuration/GraphTraversalUrl" value="http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"/>
   	</web-bnd>
