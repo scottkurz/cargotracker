@@ -298,9 +298,9 @@
 				<maven.compiler.source>1.8</maven.compiler.source>
 				<maven.compiler.target>1.8</maven.compiler.target>
 				<db.driverClass>org.postgresql.Driver</db.driverClass>
-				<db.jdbcUrl>jdbc:postgresql:file:./cargo-tracker-data/cargo-tracker-database;create=true</db.jdbcUrl>
-				<liberty.env.POSTGRES_USER>usr</liberty.env.POSTGRES_USER>
-				<liberty.env.POSTGRES_PASSWORD>pwd</liberty.env.POSTGRES_PASSWORD>
+				<db.jdbcUrl>jdbc:postgresql://localhost:5432/cargotrackerdatabase</db.jdbcUrl>
+				<liberty.env.POSTGRES_USER>admin</liberty.env.POSTGRES_USER>
+				<liberty.env.POSTGRES_PASSWORD>adminpwd</liberty.env.POSTGRES_PASSWORD>
 			</properties>
 
       <dependencies>
