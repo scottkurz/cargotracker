@@ -42,63 +42,78 @@
   </messagingEngine>
   
   <jmsQueueConnectionFactory 
-  	jndiName="java:app/jms/QueueConnectionFactory" connectionManagerRef="CargoCM">
+  	jndiName="java:app/jms/QueueConnectionFactory" queueManager="QM1">
   </jmsQueueConnectionFactory>
   
   <jmsQueue id="CargoHandledQueue" jndiName="jms/CargoHandledQueue">
-    <properties.wasJms queueName="CargoHandledQueue"/>
+    <properties.mqJmsRa baseQueueName="CargoHandledQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/CargoHandledConsumer">
-    <properties.wasJms
+    <properties.mqJmsRa
     destinationRef="CargoHandledQueue" 
     maxConcurrency="200" 
     destinationType="javax.jms.Queue"
-    destinationLookup="java:app/jms/CargoHandledQueue" />
+    destinationLookup="java:app/jms/CargoHandledQueue"
+    queueManager="QM1"
+    port="1414"
+    useJNDI="true" />
   </jmsActivationSpec>  
 
   <jmsQueue id="MisdirectedCargoQueue" jndiName="jms/MisdirectedCargoQueue">
-    <properties.wasJms queueName="MisdirectedCargoQueue"/>
+    <properties.mqJmsRa baseQueueName="MisdirectedCargoQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/MisdirectedCargoConsumer">
-    <properties.wasJms 
+    <properties.mqJmsRa 
     destinationRef="MisdirectedCargoQueue" 
     maxConcurrency="200" 
-    destinationType="javax.jms.Queue"/>
+    destinationType="javax.jms.Queue"
+    queueManager="QM1"
+    port="1414"
+    useJNDI="true"/>
   </jmsActivationSpec>  
 
   <jmsQueue id="DeliveredCargoQueue" jndiName="jms/DeliveredCargoQueue">
-    <properties.wasJms queueName="DeliveredCargoQueue"/>
+    <properties.mqJmsRa baseQueueName="DeliveredCargoQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/DeliveredCargoConsumer">
-    <properties.wasJms 
+    <properties.mqJmsRa
     destinationRef="DeliveredCargoQueue" 
     maxConcurrency="200" 
-    destinationType="javax.jms.Queue"/>
+    destinationType="javax.jms.Queue"
+    queueManager="QM1"
+    port="1414"
+    useJNDI="true"/>
   </jmsActivationSpec>  
 
   <jmsQueue id="HandlingEventRegistrationAttemptQueue" jndiName="jms/HandlingEventRegistrationAttemptQueue">
-    <properties.wasJms queueName="HandlingEventRegistrationAttemptQueue"/>
+    <properties.mqJmsRa baseQueueName="HandlingEventRegistrationAttemptQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/HandlingEventRegistrationAttemptConsumer">
-    <properties.wasJms 
+    <properties.mqJmsRa
     destinationRef="HandlingEventRegistrationAttemptQueue" 
     maxConcurrency="200" 
-    destinationType="javax.jms.Queue"/>
+    destinationType="javax.jms.Queue"
+    queueManager="QM1"
+    port="1414"
+    useJNDI="true"/>
   </jmsActivationSpec>  
 
   <jmsQueue id="RejectedRegistrationAttemptsQueue" jndiName="jms/RejectedRegistrationAttemptsQueue">
-    <properties.wasJms queueName="RejectedRegistrationAttemptsQueue"/>
+    <properties.mqJmsRa baseQueueName="RejectedRegistrationAttemptsQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/RejectedRegistrationAttemptsConsumer">
-    <properties.wasJms 
+    <properties.mqJmsRa
     destinationRef="RejectedRegistrationAttemptsQueue" 
     maxConcurrency="200" 
-    destinationType="javax.jms.Queue"/>
+    destinationType="javax.jms.Queue"
+    queueManager="QM1"
+    port="1414"
+    useJNDI="true"/>
   </jmsActivationSpec>
   
   <jdbcDriver id="hsqldriver" libraryRef="hsqlLib"/>
