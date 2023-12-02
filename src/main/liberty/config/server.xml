@@ -34,7 +34,7 @@
   <variable defaultValue="8081" name="default.https.port"/>
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
-  <wasJmsEndpoint host="*" id="InboundJmsCommsEndpoint" wasJmsPort="7276" wasJmsSSLPort="9100"/> 
+  <wasJmsEndpoint host="*" wasJmsPort="7276" wasJmsSSLPort="9100"/>
 
   <quickStartSecurity userName="usr" userPassword="pwd"/>
 
@@ -46,12 +46,12 @@
 
   <connectionManager id="CargoCM" maxPoolSize="400" minPoolSize="1"/>
 
-  <messagingEngine id="defaultME">
-    <queue forceReliability="ReliablePersistent" id="CargoHandledQueue" maxQueueDepth="5000"/>
-    <queue forceReliability="ReliablePersistent" id="MisdirectedCargoQueue" maxQueueDepth="5000"/>
-    <queue forceReliability="ReliablePersistent" id="DeliveredCargoQueue" maxQueueDepth="5000"/>
-    <queue forceReliability="ReliablePersistent" id="HandlingEventRegistrationAttemptQueue" maxQueueDepth="5000"/>
-    <queue forceReliability="ReliablePersistent" id="RejectedRegistrationAttemptsQueue" maxQueueDepth="5000"/>
+  <messagingEngine>
+    <queue forceReliability="ReliablePersistent" id="CargoHandledQueue" maxMessageDepth="5000"/>
+    <queue forceReliability="ReliablePersistent" id="MisdirectedCargoQueue" maxMessageDepth="5000"/>
+    <queue forceReliability="ReliablePersistent" id="DeliveredCargoQueue" maxMessageDepth="5000"/>
+    <queue forceReliability="ReliablePersistent" id="HandlingEventRegistrationAttemptQueue" maxMessageDepth="5000"/>
+    <queue forceReliability="ReliablePersistent" id="RejectedRegistrationAttemptsQueue" maxMessageDepth="5000"/>
   </messagingEngine>
 
   <jmsQueueConnectionFactory connectionManagerRef="CargoCM" jndiName="java:app/jms/QueueConnectionFactory">
