@@ -43,11 +43,13 @@ public class SampleDataGenerator {
   public void loadSampleData() {
     if (!isSampleLoaded()) {
       logger.info("Loading sample data.");
+      System.out.println("SKSK: loading sample data");
       loadSampleLocations();
       loadSampleVoyages();
       loadSampleCargos();
     } else {
       logger.info("Sample data already loaded, skipping.");
+      System.out.println("SKSK: sample data already loaded");
     }
   }
 

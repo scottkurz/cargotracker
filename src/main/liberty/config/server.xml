@@ -19,9 +19,13 @@
     <feature>persistence-3.1</feature>
     <feature>restfulWS-3.1</feature>
     <feature>xmlBinding-4.0</feature>
+    
+    <!-- Uncomment to activate security, e.g. transport security, batch security, etc.
+    <feature>appSecurity-5.0</feature>
+    -->
   </featureManager> 
 
-  <!--
+<logging traceSpecification="*=info:org.eclipse.cargotracker.application.util.SampleDataGenerator=all"></logging>  <!--
   <logging traceSpecification="*=info:EJBContainer=all:Injection*=all:com.ibm.websphere.jaxrs*=all:com.ibm.ws.jaxrs*=all:logservice*=all:org.apache.cxf.*=all:rarInstall*=all:WAS.j2c*=all:runtime.update*=all:resource*=all"
     traceFileName="trace.log"
     maxFileSize="0"
@@ -111,7 +115,7 @@
   <databaseStore id="EJBPersistentTimerStore" keyGenerationStrategy="SEQUENCE" tablePrefix="WLP2_"/>
   <persistentExecutor enableTaskExecution="true" id="EJBPersistentTimerExecutor" ignore.minimum.for.test.use.only="true" initialPollDelay="-1" retryInterval="300s" retryLimit="-1" taskStoreRef="EJBPersistentTimerStore">
   </persistentExecutor>
-
+  
   <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
   <dataSource id="DefaultDataSource" jdbcDriverRef="dbDriver">
         <properties URL="jdbc:hsqldb:mem:EJBTimerDS" password="pwd" user="usr"/>
@@ -135,7 +139,7 @@
   </webApplication>
 
   <keyStore id="defaultKeyStore" password="password"/>
-  <applicationMonitor updateTrigger="mbean"/>
+  <applicationMonitor updateTrigger="polled"/>
   <applicationManager autoExpand="true"/>
   <httpSession cookieName="COOKIE"/>
   <channelfw chainQuiesceTimeout="60s"/>

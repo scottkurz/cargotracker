@@ -12,9 +12,9 @@ public class LoggerProducer implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Produces
-  public Logger produceLogger(InjectionPoint injectionPoint) {
+  public Logger produceLogger(InjectionPoint injectionPoint) {	  
     String loggerName = extractLoggerName(injectionPoint);
-
+    System.out.println("SKSK: produces logger = " + loggerName);
     return Logger.getLogger(loggerName);
   }
 
