@@ -2,7 +2,9 @@
 <server description="Cargo Tracker service">
 
   <featureManager>
+   
     <feature>batch-2.1</feature>
+     
     <feature>beanValidation-3.0</feature>
     <feature>cdi-4.0</feature>
     <feature>enterpriseBeansLite-4.0</feature>
@@ -12,20 +14,29 @@
     <feature>jndi-1.0</feature>
     <feature>jsonb-3.0</feature>
     <feature>localConnector-1.0</feature>
-    <feature>mdb-4.0</feature>
-    <feature>messaging-3.1</feature>
+    
+    
     <feature>messagingClient-3.0</feature>
+    <!--
+    <feature>mdb-4.0</feature>        
+    
+    <feature>messaging-3.1</feature>
     <feature>messagingServer-3.0</feature>
+     -->
     <feature>persistence-3.1</feature>
     <feature>restfulWS-3.1</feature>
+    
     <feature>xmlBinding-4.0</feature>
+    
     
     <!-- Uncomment to activate security, e.g. transport security, batch security, etc.
     <feature>appSecurity-5.0</feature>
     -->
   </featureManager> 
 
-<logging traceSpecification="*=info:org.eclipse.cargotracker.application.util.SampleDataGenerator=all"></logging>  <!--
+<batchPersistence jobStoreRef="defaultDatabaseStore"></batchPersistence>
+
+<logging consoleLogLevel="WARNING" traceSpecification="*=info:JPA=all:RRA=all:applications=all:org.eclipse.cargotracker.application.util.SampleDataGenerator=all" maxFiles="10" maxFileSize="100"></logging>  <!--
   <logging traceSpecification="*=info:EJBContainer=all:Injection*=all:com.ibm.websphere.jaxrs*=all:com.ibm.ws.jaxrs*=all:logservice*=all:org.apache.cxf.*=all:rarInstall*=all:WAS.j2c*=all:runtime.update*=all:resource*=all"
     traceFileName="trace.log"
     maxFileSize="0"
@@ -38,15 +49,18 @@
   <variable defaultValue="8081" name="default.https.port"/>
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+  <!--
   <wasJmsEndpoint host="*" wasJmsPort="7276" wasJmsSSLPort="9100"/>
-
-  <quickStartSecurity userName="usr" userPassword="pwd"/>
-
+-->
   <authorization-roles id="com.ibm.ws.batch">
     <security-role name="batchAdmin">
       <special-subject type="EVERYONE"/>
     </security-role>
   </authorization-roles>
+
+
+  <quickStartSecurity userName="usr" userPassword="pwd"/>
+
 
   <connectionManager id="CargoCM" maxPoolSize="400" minPoolSize="1"/>
 
@@ -68,15 +82,19 @@
   <jmsActivationSpec id="cargo-tracker/CargoHandledConsumer">
     <properties.wasJms destinationLookup="java:app/jms/CargoHandledQueue" destinationRef="CargoHandledQueue" destinationType="jakarta.jms.Queue" maxConcurrency="200"/>
   </jmsActivationSpec>  
+  
+
 
   <jmsQueue id="MisdirectedCargoQueue" jndiName="jms/MisdirectedCargoQueue">
     <properties.wasJms queueName="MisdirectedCargoQueue"/>
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/MisdirectedCargoConsumer">
-    <properties.wasJms destinationRef="MisdirectedCargoQueue" destinationType="jakarta.jms.Queue" maxConcurrency="200"/>
+    <properties.wasJms destinationRef="MisdirectedCargoQueue" destinationType="${abc}" maxConcurrency="200"/>
   </jmsActivationSpec>  
-
+  
+<blah2/>
+  <blah/>
   <jmsQueue id="DeliveredCargoQueue" jndiName="jms/DeliveredCargoQueue">
     <properties.wasJms queueName="DeliveredCargoQueue"/>
   </jmsQueue>
@@ -111,15 +129,16 @@
     <jdbcDriver libraryRef="dbLib"/>
     <properties URL="jdbc:hsqldb:mem:CargoTrackerDB" password="pwd" user="usr"/>
   </dataSource>
+  
+    <dataSource id="DefaultDataSource">
+    <jdbcDriver libraryRef="dbLib"/>
+    <properties URL="jdbc:hsqldb:mem:DefaultDB" password="pwd" user="usr"/>
+  </dataSource>
 
   <databaseStore id="EJBPersistentTimerStore" keyGenerationStrategy="SEQUENCE" tablePrefix="WLP2_"/>
   <persistentExecutor enableTaskExecution="true" id="EJBPersistentTimerExecutor" ignore.minimum.for.test.use.only="true" initialPollDelay="-1" retryInterval="300s" retryLimit="-1" taskStoreRef="EJBPersistentTimerStore">
   </persistentExecutor>
   
-  <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
-  <dataSource id="DefaultDataSource" jdbcDriverRef="dbDriver">
-        <properties URL="jdbc:hsqldb:mem:EJBTimerDS" password="pwd" user="usr"/>
-  </dataSource>
 
   <ejbContainer>
         <timerService persistentExecutorRef="EJBPersistentTimerExecutor"/>
