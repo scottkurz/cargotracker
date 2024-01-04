@@ -1,1 +1,0 @@
-MERGE INTO applicationsettings USING (VALUES(1, FALSE))    AS vals(x,y) ON applicationsettings.id = vals.x  WHEN MATCHED THEN UPDATE SET applicationsettings.sampleloaded = vals.y  WHEN NOT MATCHED THEN INSERT VALUES vals.x, vals.y;
