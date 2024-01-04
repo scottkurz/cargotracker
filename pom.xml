@@ -24,6 +24,21 @@
     <maven.compiler.release>11</maven.compiler.release>
     <jakartaee-api.version>10.0.0</jakartaee-api.version>
   </properties>
+
+          <pluginRepositories>
+        <!-- Configure Sonatype OSS Maven snapshots repository -->
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
   <dependencyManagement>
     <dependencies>
       <!-- Arquillian Bill Of Management used to reduce collision between testing
@@ -463,7 +478,10 @@
           <plugin>
             <groupId>io.openliberty.tools</groupId>
             <artifactId>liberty-maven-plugin</artifactId>
-            <version>3.8.2</version>
+            <!--
+            <version>3.11-skipInitCompile</version>
+            -->
+            <version>3.10</version>
             <configuration>
               <copyDependencies>
                 <dependencyGroup>
