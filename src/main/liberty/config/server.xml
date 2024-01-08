@@ -14,15 +14,14 @@
     <feature>jndi-1.0</feature>
     <feature>jsonb-3.0</feature>
     <feature>localConnector-1.0</feature>
-    
+    <feature>restConnector-2.0</feature>
     
     <feature>messagingClient-3.0</feature>
-    <!--
+    
     <feature>mdb-4.0</feature>        
     
     <feature>messaging-3.1</feature>
     <feature>messagingServer-3.0</feature>
-     -->
     <feature>persistence-3.1</feature>
     <feature>restfulWS-3.1</feature>
     
@@ -36,7 +35,7 @@
 
 <batchPersistence jobStoreRef="defaultDatabaseStore"></batchPersistence>
 
-<logging consoleLogLevel="WARNING" traceSpecification="*=info:JPA=all:RRA=all:applications=all:org.eclipse.cargotracker.application.util.SampleDataGenerator=all" maxFiles="10" maxFileSize="100"></logging>  <!--
+<logging  traceSpecification="*=info:EJBContainer=all:logservice=all:Naming=all:applications=all:org.eclipse.cargotracker.*=all" maxFiles="10" maxFileSize="100"></logging>  <!--
   <logging traceSpecification="*=info:EJBContainer=all:Injection*=all:com.ibm.websphere.jaxrs*=all:com.ibm.ws.jaxrs*=all:logservice*=all:org.apache.cxf.*=all:rarInstall*=all:WAS.j2c*=all:runtime.update*=all:resource*=all"
     traceFileName="trace.log"
     maxFileSize="0"
@@ -80,21 +79,18 @@
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/CargoHandledConsumer">
-    <properties.wasJms destinationLookup="java:app/jms/CargoHandledQueue" destinationRef="CargoHandledQueue" destinationType="jakarta.jms.Queue" maxConcurrency="200"/>
+    <properties.wasJms destinationLookup="jms/CargoHandledQueue" destinationRef="CargoHandledQueue" 
+      destinationType="jakarta.jms.Queue" maxConcurrency="200"/>
   </jmsActivationSpec>  
-  
-
 
   <jmsQueue id="MisdirectedCargoQueue" jndiName="jms/MisdirectedCargoQueue">
-    <properties.wasJms queueName="MisdirectedCargoQueue"/>
+    <properties.wasJms queueName="MisdirectedCargoQueue" />
   </jmsQueue>
 
   <jmsActivationSpec id="cargo-tracker/MisdirectedCargoConsumer">
-    <properties.wasJms destinationRef="MisdirectedCargoQueue" destinationType="${abc}" maxConcurrency="200"/>
+    <properties.wasJms destinationRef="MisdirectedCargoQueue" destinationType="jakarta.jms.Queue" maxConcurrency="200"/>
   </jmsActivationSpec>  
   
-<blah2/>
-  <blah/>
   <jmsQueue id="DeliveredCargoQueue" jndiName="jms/DeliveredCargoQueue">
     <properties.wasJms queueName="DeliveredCargoQueue"/>
   </jmsQueue>
@@ -147,7 +143,16 @@
 
   <webApplication contextRoot="cargo-tracker" location="cargo-tracker.war">
     <classloader commonLibraryRef="dbLib"/>
+    <!--
+    <application-bnd>
+		<message-destination-ref name="jms/CargoHandledQueue" binding-name="jms/CargoHandledQueue" />
+		<message-destination-ref name="jms/DeliveredCargoQueue" binding-name="jms/DeliveredCargoQueue" />
+		<message-destination-ref name="jms/HandlingEventRegistrationAttemptQueue" binding-name="jms/HandlingEventRegistrationAttemptQueue" />
+		<message-destination-ref name="jms/RejectedRegistrationAttemptsQueue" binding-name="jms/RejectedRegistrationAttemptsQueue" />		
+	</application-bnd>
+    -->
     <web-bnd moduleName="cargo-tracker">
+		
       <env-entry name="java:app/configuration/GraphTraversalUrl" value="http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"/>
     </web-bnd>
     <application-bnd>
